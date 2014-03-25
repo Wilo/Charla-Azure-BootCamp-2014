@@ -1,0 +1,14 @@
+Metadata-Version: 1.1
+Name: azure
+Version: 0.7.1
+Summary: Windows Azure client APIs
+Home-page: https://github.com/WindowsAzure/azure-sdk-for-python
+Author: Microsoft Corporation
+Author-email: ptvshelp@microsoft.com
+License: Apache License 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: License :: OSI Approved :: Apache Software License
