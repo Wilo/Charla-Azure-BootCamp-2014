@@ -1,4 +1,4 @@
-Django==1.6.1
+Django==1.6.2
 azure==0.7.1
 django-pyodbc-azure==1.1.4
 pyodbc==3.0.7#este se instala con easy_install en modo administrador
