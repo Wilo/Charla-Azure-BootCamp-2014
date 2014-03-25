@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Django in Azure ">
+    <meta name="description" content="Simple crud django in azure">
+    <meta name="author" content="William Mendez">
+    <meta name="keywords" content="azure,django">
+
+    <link href="/static/css/metro-bootstrap.css" rel="stylesheet">
+    <link href="/static/css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="/static/css/iconFont.css" rel="stylesheet">
+   
+    <link href="/static/js/prettify/prettify.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'js/kendo/styles/kendo.common.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'js/kendo/styles/kendo.rtl.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'js/kendo/styles/kendo.bootstrap.min.css'%}"/>
+
+    <!-- Load JavaScript Libraries -->
+    <script src="/static/js/jquery/jquery.min.js"></script>
+    <script src="/static/js/jquery/jquery.widget.min.js"></script>
+    <script src="/static/js/jquery/jquery.mousewheel.js"></script>
+    <script src="/static/js/prettify/prettify.js"></script>
+    <script src="{% static 'js/metro.min.js'%}"></script>
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="/static/js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="/static/js/docs.js"></script>
+
+    <script type="text/javascript" src="{% static 'js/kendo/js/kendo.web.min.js'%}"></script>
+    <title>Django Site Azure Bootcamp 2014</title>
+
+    <style>
+    </style>
+</head>
+<body class="metro" style="background-color: #efeae3">
+    <header class="bg-dark" data-load="{% url 'header'%}"></header>
+
+    <div class="container">
+             <section class="container">
+               {% block container %}
+               {% endblock %}
+             </section>
+            <div class="container tertiary-text bg-dark fg-white" style="padding: 10px">
+                Django Sites for Azure Boot Camp 2014  <a class="fg-yellow" href="https://twitter.com/willirocker">William M&eacute;ndez</a>
+            </div>
+    </div>
+    <script src="/static/js/hitua.js"></script>
+</body>
+</html>

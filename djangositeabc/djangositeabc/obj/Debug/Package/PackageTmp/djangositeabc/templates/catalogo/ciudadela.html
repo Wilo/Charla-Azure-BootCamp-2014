@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block container %}
+   <h1>Prueba de Deploy Django App en Azure Website :)</h1>
+   <br>
+     <div id="grid"></div>
+   <br>
+     <script languaje="javascript">
+           $(document).ready(function () {
+              var datasourse = new kendo.data.DataSource({
+                  autosync: true,
+                  batch: true,
+                  transport: {
+                                   read: {
+                                       url: "/ciudadela/read/",
+                                       datatype: "json"
+                                   },
+                                   create: {
+                                        url: "/ciudadela/add/",
+                                        type: "POST",
+                                        data: function(options){
+                                               return {'Descripcion': options.models[0].Descripcion};
+                                        }
+                                   },
+                                   update: {
+                                       url: function(options){
+                                            return "/ciudadela/edit/" + options.models[0].id;
+                                       },
+                                       data: function(options){
+                                           return {'Descripcion': options.models[0].Descripcion};
+                                       },
+                                       type :"POST"
+
+                                   },
+                                   destroy: {
+                                       url: function(options){
+                                            return "/ciudadela/del/" + options.models[0].id;
+                                       },
+                                       type :"POST"
+                                   }
+                           },
+                    schema: {
+                                model: {
+                                    id: "id",
+                                       fields:{
+                                            id: { editable:false, nullable: true ,type:"number" },
+                                            Descripcion: { type: "string" }
+                                       }
+                                }
+
+                           },
+                           pageSize: 7
+              });
+              $("#grid").kendoGrid(
+                      {
+                       filterable: {
+                            extra: false,
+                            operators: {
+                                string: {
+                                    startswith: "Empieza con",
+                                    eq: "Es igual a",
+                                    neq: "No es igual a"
+                                }
+                            }
+                        },
+                        navigatable: true,
+                        pageable: {
+                            refresh: true,
+                            pageSizes: true,
+                            messages: {
+                                    itemsPerPage : "Items por pagina"
+                            }
+                        },
+                        height: 430,
+                        toolbar: [{
+                                name: "create",
+                                text: "Nuevo"
+                            }],
+                          dataSource: datasourse,
+                          columns: [
+                              { field:"id", title:"Id", width: 120, filterable: false},
+                              {
+                                  field:"Descripcion",
+                                  filterable: {
+                                      ui: function(element){
+                                              element.kendoAutoComplete({
+                                                    dataSource: datasourse,
+                                                    dataTextField: "Descripcion",
+                                                    suggest: true
+                                            });
+                                      }
+                                  },
+                                   title:"Descripcion"
+                              },
+                              {command: [
+                                  {
+                                   name: "edit",
+                                   text: {
+                                       edit: "Editar", cancel: "Cancelar", update: "Guardar"
+                                   }
+                                 },
+                                  {name:"destroy", text: "Borrar"}
+                              ], title: "Acciones", width: 200}
+                       ],
+
+                       batch: true,
+                       editable: {
+                               mode:"popup",
+                               confirmation: "Esta usted seguro de borrar este registro?",
+                               window:{
+                                    title: "Edicion"
+                               }
+
+                       },
+                       scrollable: true,
+                       sortable: {
+                           mode: "multiple"
+                       },
+                       save: function(){
+                            this.dataSource.read();
+                            this.refresh();
+                       },
+                       cancel: function(){
+                          this.dataSource.read();
+                       }
+                      });
+          });
+      </script>
+{% endblock %}
